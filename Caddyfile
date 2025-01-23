@@ -1,5 +1,12 @@
 api.enemy.sh {
-    handle /api/contact* {
+    @contact_api {
+        path /api/contact /api/contact/*
+    }
+    handle @contact_api {
         reverse_proxy enemy-sh-contact-api
+    }
+
+    handle {
+        respond "Not Found" 404
     }
 }
