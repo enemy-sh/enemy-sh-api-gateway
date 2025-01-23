@@ -18,7 +18,7 @@ resource "azurerm_dns_a_record" "a" {
 }
 
 resource "azurerm_container_app_custom_domain" "cacd" {
-  depends_on       = [azurerm_dns_txt_record.asuid, azurerm_dns_cname_record.cname]
+  depends_on       = [azurerm_dns_txt_record.asuid, azurerm_dns_a_record.a]
   name             = var.dns_zone_name
   container_app_id = azurerm_container_app.container_app.id
 
