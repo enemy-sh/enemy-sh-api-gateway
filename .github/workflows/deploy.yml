@@ -1,0 +1,20 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  call_enemy_sh_cd_workflow:
+    name: Call Enemy.sh CD Workflow
+    uses: enemy-sh/devops/.github/workflows/enemy-sh-cd.yml@main
+    with:
+      container-app-environment-id: ${{ vars.CONTAINER_APP_ENVIRONMENT_ID }}
+      resource-group-name: ${{ vars.ESH_RESOURCE_GROUP_NAME }}
+      subscription-id: ${{ vars.ESH_SUBSCRIPTION_ID }}
+      client-id: ${{ vars.ESH_CLIENT_ID }}
+    secrets:
+      github-token: ${{ secrets.CR_PAT }}
+      client-secret: ${{ secrets.ESH_CLIENT_SECRET }}
+      tenant-id: ${{ secrets.ESH_TENANT_ID }}
