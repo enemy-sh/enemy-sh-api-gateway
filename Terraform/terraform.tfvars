@@ -7,10 +7,10 @@
 // resource_group_name set in pipeline
 // registry_username set in pipeline
 
-max_replicas    = 5
-min_replicas    = 1
-cpu             = "0.25"
-memory          = "0.5Gi"
-registry_server = "ghcr.io"
-dns_zone_name = "api.enemy.sh"
+max_replicas                 = 5
+min_replicas                 = 1
+cpu                          = "0.25"
+memory                       = "0.5Gi"
+registry_server              = "ghcr.io"
+dns_zone_name                = "api.enemy.sh"
 dns_zone_resource_group_name = "Core"

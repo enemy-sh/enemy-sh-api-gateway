@@ -1,8 +1,8 @@
 resource "azurerm_dns_txt_record" "asuid" {
-  name = "asuid"
+  name                = "asuid"
   resource_group_name = var.dns_zone_resource_group_name
-  zone_name = var.dns_zone_name
-  ttl = 300
+  zone_name           = var.dns_zone_name
+  ttl                 = 300
 
   record {
     value = azurerm_container_app.container_app.custom_domain_verification_id
@@ -10,23 +10,24 @@ resource "azurerm_dns_txt_record" "asuid" {
 }
 
 resource "azurerm_dns_cname_record" "cname" {
-  name = "@"
+  depends_on          = [azurerm_container_app.container_app]
+  name                = "@"
   resource_group_name = var.dns_zone_resource_group_name
-  zone_name = var.dns_zone_name
-  ttl = 300
-  record = azurerm_container_app.container_app.latest_revision_fqdn
+  zone_name           = var.dns_zone_name
+  ttl                 = 300
+  record              = azurerm_container_app.container_app.latest_revision_fqdn
 }
 
 resource "azurerm_container_app_custom_domain" "cacd" {
-  depends_on = [ azurerm_dns_txt_record.asuid, azurerm_dns_cname_record.cname ]
-  name = var.dns_zone_name
+  depends_on       = [azurerm_dns_txt_record.asuid, azurerm_dns_cname_record.cname]
+  name             = var.dns_zone_name
   container_app_id = azurerm_container_app.container_app.id
-  
+
 
   lifecycle {
-    ignore_changes = [ 
-        certificate_binding_type,
-        container_app_environment_certificate_id
+    ignore_changes = [
+      certificate_binding_type,
+      container_app_environment_certificate_id
     ]
   }
 }
