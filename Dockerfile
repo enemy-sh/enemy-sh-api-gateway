@@ -1,7 +1,8 @@
-FROM nginx:stable
+FROM caddy:2
 
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY Caddyfile /etc/caddy/Caddyfile
 
 EXPOSE 80
+EXPOSE 443
 
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["caddy", "run", "--config", "/etc/caddy/Caddyfile"]
