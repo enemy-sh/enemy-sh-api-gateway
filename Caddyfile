@@ -1,3 +1,5 @@
 api.enemy.sh {
-  reverse_proxy /api/contact/* enemy-sh-contact-api
+    handle /api/contact* {
+        reverse_proxy enemy-sh-contact-api
+    }
 }
