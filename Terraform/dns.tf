@@ -1,5 +1,5 @@
 resource "azurerm_dns_txt_record" "asuid" {
-  name = "asuid.${var.dns_zone_name}"
+  name = "asuid"
   resource_group_name = var.dns_zone_resource_group_name
   zone_name = var.dns_zone_name
   ttl = 300
