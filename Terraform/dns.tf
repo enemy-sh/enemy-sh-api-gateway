@@ -9,10 +9,19 @@ resource "azurerm_dns_txt_record" "asuid" {
   }
 }
 
+resource "azurerm_dns_cname_record" "cname" {
+  name = "@"
+  resource_group_name = var.dns_zone_resource_group_name
+  zone_name = var.dns_zone_name
+  ttl = 300
+  record = azurerm_container_app.container_app.default_site_hostname
+}
+
 resource "azurerm_container_app_custom_domain" "cacd" {
-  depends_on = [ azurerm_dns_txt_record.asuid ]
+  depends_on = [ azurerm_dns_txt_record.asuid, azurerm_dns_cname_record.cname ]
   name = var.dns_zone_name
   container_app_id = azurerm_container_app.container_app.id
+  
 
   lifecycle {
     ignore_changes = [ 
