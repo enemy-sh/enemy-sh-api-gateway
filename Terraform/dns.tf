@@ -9,12 +9,12 @@ resource "azurerm_dns_txt_record" "asuid" {
   }
 }
 
-resource "azurerm_dns_cname_record" "cname" {
-  name                = "@"
+resource "azurerm_dns_a_record" "a" {
+  name = "@"
+  zone_name = var.dns_zone_name
   resource_group_name = var.dns_zone_resource_group_name
-  zone_name           = var.dns_zone_name
-  ttl                 = 300
-  record              = "*.trafficmanager.net"
+  ttl = 3600
+  records = [var.container_app_environment_static_ip_address]
 }
 
 resource "azurerm_container_app_custom_domain" "cacd" {

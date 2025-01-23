@@ -13,6 +13,11 @@ variable "container_app_environment_id" {
   description = "The environment ID"
 }
 
+variable "container_app_environment_static_ip_address" {
+  type        = string
+  description = "The environment static IP address"
+}
+
 variable "image" {
   type        = string
   description = "The image name"
