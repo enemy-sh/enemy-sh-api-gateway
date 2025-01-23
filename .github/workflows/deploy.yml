@@ -11,7 +11,7 @@ jobs:
     uses: enemy-sh/devops/.github/workflows/enemy-sh-cd.yml@main
     with:
       container-app-environment-id: ${{ vars.CONTAINER_APP_ENVIRONMENT_ID }}
-      container-app-static-ip-address: ${{ vars.CONTAINER_APP_ENVIRONMENT_STATIC_IP_ADDRESS }}
+      container-app-environment-static-ip-address: ${{ vars.CONTAINER_APP_ENVIRONMENT_STATIC_IP_ADDRESS }}
       resource-group-name: ${{ vars.ESH_RESOURCE_GROUP_NAME }}
       subscription-id: ${{ vars.ESH_SUBSCRIPTION_ID }}
       client-id: ${{ vars.ESH_CLIENT_ID }}
