@@ -9,19 +9,12 @@ resource "azurerm_dns_txt_record" "asuid" {
   }
 }
 
-resource "null_resource" "wait_for_container_app" {
-  triggers = {
-    fqdn = azurerm_container_app.container_app.latest_revision_fqdn
-  }
-}
-
 resource "azurerm_dns_cname_record" "cname" {
-  depends_on          = [null_resource.wait_for_container_app]
   name                = "@"
   resource_group_name = var.dns_zone_resource_group_name
   zone_name           = var.dns_zone_name
   ttl                 = 300
-  record              = null_resource.wait_for_container_app.triggers.fqdn
+  record              = "*.trafficmanager.net"
 }
 
 resource "azurerm_container_app_custom_domain" "cacd" {
