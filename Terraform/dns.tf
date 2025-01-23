@@ -14,7 +14,7 @@ resource "azurerm_dns_cname_record" "cname" {
   resource_group_name = var.dns_zone_resource_group_name
   zone_name = var.dns_zone_name
   ttl = 300
-  record = azurerm_container_app.container_app.default_site_hostname
+  record = azurerm_container_app.container_app.latest_revision_fqdn
 }
 
 resource "azurerm_container_app_custom_domain" "cacd" {
