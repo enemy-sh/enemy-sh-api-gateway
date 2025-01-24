@@ -17,7 +17,7 @@ resource "azurerm_container_app" "container_app" {
       percentage      = 100
     }
 
-    target_port = 443
+    target_port = 80
   }
 
   template {
