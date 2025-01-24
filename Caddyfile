@@ -1,6 +1,6 @@
 api.enemy.sh {
     handle_path /api/contact* {
-        reverse_proxy enemy-sh-contact-api
+        reverse_proxy enemy-sh-contact-api:80
     }
 
     handle {
