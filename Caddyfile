@@ -1,19 +1,18 @@
 http://api.enemy.sh {
-	handle /api/contact* {
-		header Access-Control-Allow-Origin "https://enemy.sh"
-		header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
-		header Access-Control-Allow-Headers "*"
-		header Access-Control-Allow-Credentials "true"
+        log {
+                level INFO
+                format json
+                output stdout
+        }
+        handle /api/contact* {
+                reverse_proxy enemy-sh-contact-api {
+                        header_up X-Original-URL {http.request.uri}
+                        header_up X-Forwarded-Uri {http.request.uri}
+                        header_up Host {http.reverse_proxy.upstream.hostport}
+                }
+        }
 
-		@options {
-			method OPTIONS
-		}
-		respond @options 204
-
-		reverse_proxy enemy-sh-contact-api
-	}
-
-	handle {
-		respond "Not Found" 404
-	}
+        handle {
+                respond "Not Found" 404
+        }
 }
