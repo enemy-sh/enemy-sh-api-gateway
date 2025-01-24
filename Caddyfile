@@ -8,6 +8,7 @@ http://api.enemy.sh {
                 reverse_proxy enemy-sh-contact-api {
                         header_up X-Original-URL {http.request.uri}
                         header_up X-Forwarded-Uri {http.request.uri}
+                        header_up X-Real-IP {http.request.header.X-Forwarded-For}
                         header_up Host {http.reverse_proxy.upstream.hostport}
                 }
         }
