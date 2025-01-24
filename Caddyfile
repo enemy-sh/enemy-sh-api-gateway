@@ -1,7 +1,3 @@
-{
-    auto_https off
-}
-
 api.enemy.sh {
     handle_path /api/contact* {
         reverse_proxy enemy-sh-contact-api
