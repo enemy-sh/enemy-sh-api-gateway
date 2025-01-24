@@ -4,6 +4,10 @@ https://api.enemy.sh {
 		issuer acme
 	}
 
+	handle /.well-known/acme-challenge/* {
+		respond {http.request.uri.path} 200
+	}
+
 	handle_path /api/contact* {
 		header Access-Control-Allow-Origin "https://enemy.sh"
 		header Access-Control-Allow-Methods "GET, POST, PUT, DELETE, OPTIONS"
